@@ -56,7 +56,7 @@ int	parse_args(int argc, char **argv, t_sim *sim)
 		return (fail("invalid time_to_debug"));
 	if (!parse_long(argv[5], &sim->time_to_refactor) || sim->time_to_refactor < 0)
 		return (fail("invalid time_to_refactor"));
-	if (!parse_int(argv[6], &sim->compiles_required) || sim->compiles_required < 0)
+	if (!parse_int(argv[6], &sim->compiles_required) || parse_int(argv[1], &sim->n_coders) < 0)
 		return (fail("invalid number_of_compiles_required"));
 	if (!parse_long(argv[7], &sim->dongle_cooldown) || sim->dongle_cooldown < 0)
 		return (fail("invalid dongle_cooldown"));

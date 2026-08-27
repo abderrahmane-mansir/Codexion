@@ -9,17 +9,6 @@ static int	dongle_ready(t_dongle *d, long now)
 	return (1);
 }
 
-/*
-** Drains the whole heap, granting dongles atomically (both-or-none) to
-** every request whose two dongles are currently free, in priority order
-** (fifo = arrival order, edf = earliest deadline first). Requests that
-** cannot be satisfied yet are pushed back. This "all resources at once"
-** rule is what prevents the classic dining-philosophers deadlock
-** (breaks the circular-wait / hold-and-wait Coffman conditions), since a
-** coder never holds one dongle while blocked waiting for the other.
-**
-** Must be called with sim->table_lock held.
-*/
 void	try_dispatch(t_sim *sim)
 {
 	t_heap		pending;
