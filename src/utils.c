@@ -33,10 +33,6 @@ void	set_stop(t_sim *sim)
 	pthread_mutex_unlock(&sim->table_lock);
 }
 
-/*
-** Sleeps in 1ms chunks so a stop signal (burnout / all-done)
-** is noticed quickly instead of blocking for the full duration.
-*/
 void	precise_sleep(t_sim *sim, long ms)
 {
 	long	slept;

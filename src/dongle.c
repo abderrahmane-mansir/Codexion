@@ -43,11 +43,10 @@ void	try_dispatch(t_sim *sim)
 		pthread_cond_broadcast(&sim->table_cond);
 }
 
-static void	build_deadline(t_request *req, t_coder *c, t_sim *sim)
+static void	build_deadline(t_request *req, long deadline_base, t_sim *sim)
 {
-	req->coder_id = c->id;
 	req->seq = sim->seq_counter++;
-	req->deadline = c->last_compile_start + sim->time_to_burnout;
+	req->deadline = deadline_base + sim->time_to_burnout;
 }
 
 /* Returns 1 if both dongles were obtained, 0 if the simulation stopped
@@ -58,11 +57,16 @@ int	acquire_dongles(t_coder *c)
 	t_request		req;
 	struct timeval	now;
 	struct timespec	ts;
+	long			last_start;
 
 	sim = c->sim;
+	pthread_mutex_lock(&sim->state_lock);
+	last_start = c->last_compile_start;
+	req.coder_id = c->id;
+	pthread_mutex_unlock(&sim->state_lock);
 	pthread_mutex_lock(&sim->table_lock);
 	c->granted = 0;
-	build_deadline(&req, c, sim);
+	build_deadline(&req, last_start, sim);
 	heap_push(&sim->heap, req);
 	try_dispatch(sim);
 	while (!c->granted && !is_stopped(sim))

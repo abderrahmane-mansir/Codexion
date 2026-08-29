@@ -32,11 +32,9 @@ static int	parse_long(const char *s, long *out)
 
 static int	parse_int(const char *s, int *out)
 {
-	long	val;
-
-	if (!parse_long(s, &val))
+	if (!only_digits(s))
 		return (0);
-	*out = (int)val;
+	*out = atoi(s);
 	return (1);
 }
 
