@@ -1,4 +1,4 @@
-#include "../codexion.h"
+#include "codexion.h"
 
 static int	fail(const char *msg)
 {
@@ -48,7 +48,7 @@ int	parse_args(int argc, char **argv, t_sim *sim)
 			"dongle_cooldown scheduler(fifo|edf)"));
 	if (!parse_int(argv[1], &sim->n_coders) || sim->n_coders < 1)
 		return (fail("invalid number_of_coders"));
-	if (!parse_long(argv[2], &sim->time_to_burnout) || sim->time_to_burnout <= 0)
+	if (!parse_long(argv[2], &sim->time_to_burnout))
 		return (fail("invalid time_to_burnout"));
 	if (!parse_long(argv[3], &sim->time_to_compile) || sim->time_to_compile < 0)
 		return (fail("invalid time_to_compile"));

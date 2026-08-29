@@ -1,4 +1,4 @@
-#include "../codexion.h"
+#include "codexion.h"
 
 static int	dongle_ready(t_dongle *d, long now)
 {

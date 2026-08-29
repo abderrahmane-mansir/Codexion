@@ -1,4 +1,4 @@
-#include "../codexion.h"
+#include "codexion.h"
 
 static int	start_coders(t_sim *sim)
 {

@@ -1,4 +1,4 @@
-#include "../codexion.h"
+#include "codexion.h"
 
 static int	check_burnout(t_sim *sim, long now)
 {

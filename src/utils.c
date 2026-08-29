@@ -1,4 +1,4 @@
-#include "../codexion.h"
+#include "codexion.h"
 
 long	get_time_ms(t_sim *sim)
 {

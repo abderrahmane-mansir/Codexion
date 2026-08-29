@@ -1,7 +1,7 @@
 NAME	= codexion
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror -pthread
-SRC		= main.c parsing.c init.c coder.c dongle.c heap.c monitor.c utils.c
+SRC		= src/main.c src/parsing.c src/init.c src/coder.c src/dongle.c src/heap.c src/monitor.c src/utils.c
 OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
@@ -9,7 +9,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %.c codexion.h
+%.o: %.c src/codexion.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
